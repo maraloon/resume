@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Company;
+use App\Form\CompanyType;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/company", name="company")
@@ -13,7 +16,32 @@ use Symfony\Component\HttpFoundation\Response;
 class CompanyController extends Controller
 {
     /**
-     * @Route("/", name="company_list")
+     * @Route("/add", name="_add")
+     */
+    public function add(Request $request)
+    {
+        $form = $this->createForm(CompanyType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $company = $form->getData();
+
+            $this->getEm()->persist($company);
+            $this->getEm()->flush();
+
+            $this->addFlash('success', 'Компания добавлена!');
+            return $this->redirectToRoute('company_list');
+        }
+
+        return $this->render('company/edit.html.twig', [
+            'companyForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/", name="_list")
      */
     public function list()
     {
@@ -24,8 +52,60 @@ class CompanyController extends Controller
         ]);
     }
 
-    private function getRepo()
+    /**
+     * @Route("/{id}", name="_show")
+     */
+    public function show(Company $company)
     {
-        return $this->getDoctrine()->getManager()->getRepository(Company::class);
+        $company = $this->getRepo()->find($company);
+
+        return $this->render('company/show.html.twig', [
+            'company' => $company
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="_edit")
+     */
+    public function edit(Request $request, Company $company)
+    {
+        $form = $this->createForm(CompanyType::class, $company);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->getEm()->persist($company);
+            $this->getEm()->flush();
+
+            $this->addFlash('success', 'Компания обновлена!');
+            return $this->redirectToRoute('company_list');
+
+        }
+
+        return $this->render('company/edit.html.twig', [
+            'companyForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="_delete")
+     */
+    public function delete(Company $company)
+    {
+        $this->getEm()->remove($company);
+        $this->getEm()->flush();
+
+        $this->addFlash('success', 'Компания удалена!');
+        return $this->redirectToRoute('company_list');
+    }
+
+    private function getEm(): ObjectManager
+    {
+        return $this->getDoctrine()->getManager();
+    }
+
+    private function getRepo(): ObjectRepository
+    {
+        return $this->getEm()->getRepository(Company::class);
     }
 }

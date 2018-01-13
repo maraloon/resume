@@ -17,7 +17,7 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @ORM\Column(type="string", unique=true)
      */
     private $name;
 
@@ -41,7 +41,7 @@ class Company
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -51,7 +51,7 @@ class Company
         $this->name = $name;
     }
 
-    public function getSite(): string
+    public function getSite(): ?string
     {
         return $this->site;
     }
@@ -61,7 +61,7 @@ class Company
         $this->site = $site;
     }
 
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
@@ -71,7 +71,7 @@ class Company
         $this->address = $address;
     }
 
-    public function getPhoneNum(): string
+    public function getPhoneNum(): ?string
     {
         return $this->phoneNum;
     }

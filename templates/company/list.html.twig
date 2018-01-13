@@ -1,6 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Компании</h1>
-    {{ dump(companies) }}
+    <h1>Список компаний</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Сайт</th>
+            <th>Юр. адресс</th>
+            <th>Телефон</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for company in companies %}
+            <tr>
+                <td>
+                    <a href="{{ path('company_show',{
+                        'id': company.id
+                    }) }}">
+                        {{ company.name }}
+                    </a>
+                </td>
+                <td>
+                    <a href="http://{{ company.site }}">
+                        {{ company.site }}
+                    </a>
+                </td>
+                <td>{{ company.address }}</td>
+                <td>
+                    {{ company.phoneNum }}
+                </td>
+                <td>
+                    <a href="{{ path('company_edit',{
+                        'id': company.id
+                    }) }}">Редактировать</a>
+                    <a href="{{ path('company_delete',{
+                        'id': company.id
+                    }) }}">Удалить</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('company_add') }}">Добавить компанию</a>
 {% endblock %}
