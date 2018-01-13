@@ -4,3 +4,8 @@ App\Entity\Company:
         site: <domainName()>
         address: <address()>
         phoneNum: <phoneNumber()>
+
+App\Entity\Resume:
+    resume_{1..5}:
+        position: <jobTitle()>
+        text: <text()>
