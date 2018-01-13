@@ -1,11 +1,13 @@
+App\Entity\Resume:
+    resume_{1..10}:
+        position: <jobTitle()>
+        text: <text()>
+
 App\Entity\Company:
-    company_{1..10}:
+    company_{1..100}:
         name: <company()>
         site: <domainName()>
         address: <address()>
         phoneNum: <phoneNumber()>
-
-App\Entity\Resume:
-    resume_{1..5}:
-        position: <jobTitle()>
-        text: <text()>
+        reaction: <boolean()>
+        resume: '@resume_*'

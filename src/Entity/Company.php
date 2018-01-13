@@ -36,6 +36,16 @@ class Company
      */
     private $phoneNum;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Resume", inversedBy="companies")
+     */
+    private $resume;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $reaction;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,5 +89,39 @@ class Company
     public function setPhoneNum(string $phoneNum)
     {
         $this->phoneNum = $phoneNum;
+    }
+
+    public function getReaction(): ?bool
+    {
+        return $this->reaction;
+    }
+
+    public function setReaction(bool $reaction)
+    {
+        if (null === $this->getReaction()){
+            // todo add $this->resume and check for $this->resume !== null
+            // in other words, Company can react Resume if company received it from aspirant
+            $this->reaction = $reaction;
+        }
+    }
+
+    public function invite()
+    {
+        $this->setReaction(true);
+    }
+
+    public function dismiss()
+    {
+        $this->setReaction(false);
+    }
+
+    public function getResume(): ?Resume
+    {
+        return $this->resume;
+    }
+
+    public function setResume(Resume $resume)
+    {
+        $this->resume = $resume;
     }
 }
