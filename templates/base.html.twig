@@ -12,6 +12,9 @@
             </div>
         {% endfor %}
         {% block body %}{% endblock %}
+        <p>
+            <a href="{{ path('main') }}">На главную</a>
+        </p>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
