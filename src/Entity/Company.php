@@ -22,17 +22,17 @@ class Company
     private $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $site;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=12)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $phoneNum;
 

@@ -1,0 +1,6 @@
+App\Entity\Company:
+    company_{1..10}:
+        name: <company()>
+        site: <domainName()>
+        address: <address()>
+        phoneNum: <phoneNumber()>
