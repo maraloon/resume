@@ -9,5 +9,5 @@ App\Entity\Company:
         site: <domainName()>
         address: <address()>
         phoneNum: <phoneNumber()>
-        reaction: <boolean()>
+        answer: <boolean()>
         resume: '@resume_*'

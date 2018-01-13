@@ -44,7 +44,7 @@ class Company
     /**
      * @ORM\Column(type="boolean")
      */
-    private $reaction;
+    private $answer;
 
     public function getId(): ?int
     {
@@ -91,28 +91,28 @@ class Company
         $this->phoneNum = $phoneNum;
     }
 
-    public function getReaction(): ?bool
+    public function getAnswer(): ?bool
     {
-        return $this->reaction;
+        return $this->answer;
     }
 
-    public function setReaction(bool $reaction)
+    public function setAnswer(bool $answer)
     {
-        if (null === $this->getReaction()){
+        if (null === $this->getAnswer()){
             // todo add $this->resume and check for $this->resume !== null
             // in other words, Company can react Resume if company received it from aspirant
-            $this->reaction = $reaction;
+            $this->answer = $answer;
         }
     }
 
     public function invite()
     {
-        $this->setReaction(true);
+        $this->setAnswer(true);
     }
 
     public function dismiss()
     {
-        $this->setReaction(false);
+        $this->setAnswer(false);
     }
 
     public function getResume(): ?Resume
