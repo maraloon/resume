@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Информация о резюме</h1>
+
+    <h3>Название должности</h3>
+    <p>{{ resume.position }}</p>
+
+    <h3>Описание</h3>
+    <p>{{ resume.text }}</p>
+
+    <h3>Дата создания</h3>
+    <p>{{ resume.createdAt|date('Y-m-d h:i:s') }}</p>
+
+    <h3>Дата последнего обновления</h3>
+    <p>{{ resume.updatedAt|date('Y-m-d h:i:s') }}</p>
+
+{% endblock %}
+

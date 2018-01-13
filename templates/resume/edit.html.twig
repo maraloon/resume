@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Добавление новго резюме</h1>
+    {{ form_start(resumeForm) }}
+    {{ form_widget(resumeForm) }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    {{ form_end(resumeForm) }}
+{% endblock %}
+

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Список резюме</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Должность</th>
+            <th>Создано</th>
+            <th>Обновлено</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for resume in resumes %}
+            <tr>
+                <td>
+                    <a href="{{ path('resume_show',{
+                        'id': resume.id
+                    }) }}">
+                        {{ resume.position }}
+                    </a>
+                </td>
+                <td>{{ resume.createdAt|date('Y-m-d h:i:s') }}</td>
+                <td>
+                    {{ resume.updatedAt|date('Y-m-d h:i:s') }}
+                </td>
+                <td>
+                    <a href="{{ path('resume_edit',{
+                        'id': resume.id
+                    }) }}">Редактировать</a>
+                    <a href="{{ path('resume_delete',{
+                        'id': resume.id
+                    }) }}">Удалить</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('resume_add') }}">Создать резюме</a>
+{% endblock %}
