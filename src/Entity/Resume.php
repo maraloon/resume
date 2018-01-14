@@ -42,9 +42,11 @@ class Resume
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Company", mappedBy="resume")
+     * @ORM\OneToMany(targetEntity="Company", mappedBy="resume", cascade={"persist"})
      */
     private $companies;
+
+    private $invites;
 
     public function __construct()
     {
@@ -99,5 +101,27 @@ class Resume
 
         $this->companies[] = $company;
         $company->setResume($this);
+    }
+
+    public function getInvites()
+    {
+        if ($this->invites === null) {
+            $this->invites = $this->countInvites();
+        }
+
+        return $this->invites;
+    }
+
+    private function countInvites()
+    {
+        $invites = 0;
+
+        foreach ($this->companies as $company) {
+            if ($company->getAnswer()) {
+                $invites++;
+            }
+        }
+
+        return $invites;
     }
 }

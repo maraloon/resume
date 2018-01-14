@@ -46,6 +46,11 @@ class Company
      */
     private $answer;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $answeredAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,7 @@ class Company
             // todo add $this->resume and check for $this->resume !== null
             // in other words, Company can react Resume if company received it from aspirant
             $this->answer = $answer;
+            $this->setAnsweredAt(new \DateTime());
         }
     }
 
@@ -115,6 +121,16 @@ class Company
         $this->setAnswer(false);
     }
 
+    public function getAnsweredAt(): ?\DateTime
+    {
+        return $this->answeredAt;
+    }
+
+    public function setAnsweredAt($answeredAt)
+    {
+        $this->answeredAt = $answeredAt;
+    }
+
     public function getResume(): ?Resume
     {
         return $this->resume;
@@ -122,6 +138,11 @@ class Company
 
     public function setResume(Resume $resume)
     {
+        if ($this->resume == $resume){
+            return;
+        }
+
         $this->resume = $resume;
+        $resume->addCompany($this);
     }
 }

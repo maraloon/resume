@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Статистика</h1>
+    <h3>Самое популярное резюме</h3>
+    <p>Должность:
+        <a href="{{ path('resume_show',{
+            'id': resume.id
+        }) }}">
+            {{ resume.position }}
+        </a>
+    </p>
+    <p>Откликов: {{ invites }}</p>
+{% endblock %}

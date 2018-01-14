@@ -2,10 +2,14 @@
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
-/var/*
-/vendor/*
+var/
+vendor/
 ###< symfony/framework-bundle ###
 
 ###> symfony/web-server-bundle ###
 .web-server-pid
 ###< symfony/web-server-bundle ###
+
+###> PHPStorm files ###
+.idea/
+###< PHPStorm files ###

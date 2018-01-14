@@ -13,16 +13,18 @@ class ResumeRepository extends ServiceEntityRepository
         parent::__construct($registry, Resume::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findMostPopular()
     {
-        return $this->createQueryBuilder('r')
-            ->where('r.something = :value')->setParameter('value', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->_em->createQuery('
+            SELECT resume,COUNT(resume.id) AS invites
+            FROM ' . Resume::class . ' resume
+            INNER JOIN resume.companies c
+            WHERE c.answer=TRUE
+            GROUP BY resume.id
+            ORDER BY invites DESC
+        ')
+            //todo it's a hack
+            ->getResult()[0][0];
     }
-    */
+
 }

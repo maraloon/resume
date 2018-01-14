@@ -1,13 +1,14 @@
 App\Entity\Resume:
     resume_{1..10}:
-        position: <jobTitle()>
+        position(unique): <jobTitle()>
         text: <text()>
 
 App\Entity\Company:
     company_{1..100}:
-        name: <company()>
+        name(unique): <company()>
         site: <domainName()>
         address: <address()>
         phoneNum: <phoneNumber()>
-        answer: <boolean()>
         resume: '@resume_*'
+        answer: <boolean()>
+        answeredAt: <dateTimeInInterval('-3 days','+3 days')>

@@ -15,5 +15,17 @@
     <h3>Дата последнего обновления</h3>
     <p>{{ resume.updatedAt|date('Y-m-d h:i:s') }}</p>
 
+    <h3>Отклики</h3>
+    {% for company in resume.companies %}
+        <p>
+            {% if company.answer %}
+                Приглашение:
+            {% else %}
+                Отказ:
+            {% endif %}
+            {{ company.name }}
+
+        </p>
+    {% endfor %}
 {% endblock %}
 
