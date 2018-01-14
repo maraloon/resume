@@ -103,11 +103,12 @@ class Company
 
     public function setAnswer(bool $answer)
     {
-        if (null === $this->getAnswer()){
-            // todo add $this->resume and check for $this->resume !== null
-            // in other words, Company can react Resume if company received it from aspirant
-            $this->answer = $answer;
-            $this->setAnsweredAt(new \DateTime());
+        if (null === $this->getAnswer()) {
+            // Company can react Resume if company received it from aspirant
+            if ($this->getResume()) {
+                $this->answer = $answer;
+                $this->setAnsweredAt(new \DateTime());
+            }
         }
     }
 
@@ -138,7 +139,7 @@ class Company
 
     public function setResume(Resume $resume)
     {
-        if ($this->resume == $resume){
+        if ($this->resume == $resume) {
             return;
         }
 

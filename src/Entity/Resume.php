@@ -42,7 +42,11 @@ class Resume
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Company", mappedBy="resume",orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Company",
+     *     mappedBy="resume",
+     *     orphanRemoval=true,
+     *     cascade={"persist"}
+     *     )
      */
     private $companies;
 

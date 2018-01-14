@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% for msg in app.session.flashBag.get('success') %}
-            <div class="alert alert-success">
-                {{ msg }}
-            </div>
-        {% endfor %}
-        {% block body %}{% endblock %}
-        <p>
-            <a href="{{ path('main') }}">На главную</a>
-        </p>
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% for msg in app.session.flashBag.get('success') %}
+    <div class="alert alert-success">
+        {{ msg }}
+    </div>
+{% endfor %}
+{% block body %}{% endblock %}
+<p>
+    <a href="{{ path('main') }}">На главную</a>
+</p>
+{% block javascripts %}{% endblock %}
+</body>
 </html>

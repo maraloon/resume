@@ -2,5 +2,30 @@
 
 {% block body %}
     <h1>Профиль компании</h1>
-    {{ dump(company) }}
+
+    <p>Название: {{ company.name }}</p>
+    <p>Сайт: {{ company.site }}</p>
+    <p>Адрес: {{ company.address }}</p>
+    <p>Телефон: {{ company.phoneNum }}</p>
+
+    {% if company.resume is defined %}
+        <p>Присланное резюме:
+        <a href="{{ path('resume_show',{
+            'id': company.resume.id
+        }) }}">
+            {{ company.resume.position }}
+        </a>
+
+    {% endif %}
+
+    {% if company.answer is defined %}
+        {% if company.answer == true %}
+            Приглашение
+        {% else %}
+            Отказ
+        {% endif %}
+    {% else %}
+        Не отвечено
+    {% endif %}
+    </p>
 {% endblock %}

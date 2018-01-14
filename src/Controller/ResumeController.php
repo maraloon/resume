@@ -39,7 +39,7 @@ class ResumeController extends Controller
             'resumeForm' => $form->createView()
         ]);
     }
-    
+
     /**
      * @Route("/", name="_list")
      */

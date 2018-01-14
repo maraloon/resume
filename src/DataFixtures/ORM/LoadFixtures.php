@@ -12,7 +12,7 @@ class LoadFixtures implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        Fixtures::load(__DIR__.'/fixtures.yaml', $manager, ['locale' => 'ru_RU']);
+        Fixtures::load(__DIR__ . '/fixtures.yaml', $manager, ['locale' => 'ru_RU']);
     }
 
 }

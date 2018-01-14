@@ -23,8 +23,11 @@
             {% else %}
                 Отказ:
             {% endif %}
-            {{ company.name }}
-
+            <a href="{{ path('company_show',{
+                'id': company.id
+            }) }}">
+                {{ company.name }}
+            </a>
         </p>
     {% endfor %}
 {% endblock %}
