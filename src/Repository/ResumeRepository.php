@@ -15,16 +15,22 @@ class ResumeRepository extends ServiceEntityRepository
 
     public function findMostPopular()
     {
-        return $this->_em->createQuery('
-            SELECT resume,COUNT(resume.id) AS invites
-            FROM ' . Resume::class . ' resume
-            INNER JOIN resume.companies c
-            WHERE c.answer=TRUE
-            GROUP BY resume.id
-            ORDER BY invites DESC
-        ')
-            //todo it's a hack
-            ->getResult()[0][0];
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb
+            ->select('r')
+            ->from('\App\Entity\Resume', 'r')
+            ->innerJoin('r.companies', 'c')
+            ->where('c.answer = :answer')
+            ->groupBy('r.id')
+            ->orderBy(
+                $qb->expr()->count('r.id'),
+                'DESC')
+            ->setParameter('answer', true)
+            ->setFirstResult(1)
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getSingleResult();
     }
 
 }
